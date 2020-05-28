@@ -8,6 +8,9 @@ Description: ADD
 
 
 class Pandas:
-    
-    def __init__(self):
-        pass
+
+    def __init__(self, df):
+        """
+        Function takes in a dataframe and creates the Pandas class.
+        """
+        self.df = df
