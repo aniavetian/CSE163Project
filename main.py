@@ -9,13 +9,19 @@ Description: Tests every function in every file
 import pandas as pd
 
 # File imports
-#from pandas_file import Pandas  # Whatever you name the class
-#from graphing_file import Graphing  # Whatever you name the class
+# from pandas_file import Pandas  # Whatever you name the class
+# from graphing_file import Graphing  # Whatever you name the class
 from habitable_planets_file import Habitable_Planets
 from machine_learning_file import Machine_Learning
 
 
-def test_habitable_planets_file(df):
+def main():
+    """
+    Calls all methods for the Final Project
+    """
+    df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
+
+    # --- Testing habitable_planets_file --- #
     Hb = Habitable_Planets(df)
 
     # tests the calculate_planet_tempurature() method
