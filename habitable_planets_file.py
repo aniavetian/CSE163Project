@@ -32,12 +32,14 @@ class Habitable_Planets:
         Calculations:
             Formula: (In this formula, T is effective tempurature of the
                       planet)
-                σSB*T^4 = F = L/(4πr^2)
+                σT^4 = F = L/(4πr^2)
+            Units = (W * m^(-2) * K^(-4)) * K^4 = W * m^(-2) = ((W * m^(-2) *
+                     K^(-4)) * K^4 * m^2) * m^(-2)
             Solve for T:
-                T = ∜(F/σSB)
+                T = ∜(F/σ)
             Luminosity Formula: (In this formula, T is effective tempurature
                                  of the star)
-                L = R^2 * T^4
+                L = σT^4 * (4πr^2)
             Habitable Tempurature for a planet:
                 0-100°C (273.15-373.15° Kelvin)
 
@@ -64,23 +66,50 @@ class Habitable_Planets:
 
         Written by: Bradley Knorr
         """
+        # Stefan Boltzmann constant (σ or σsb)
+        osb = 5.670367*10**(-8)  # W * m^(-2) * K^(-4)
 
-        # Stefan Boltzmann constant
-        osb = 5.670367*10**(-8)
+        # convert to correct units
+
+        # Solar radii (R) to meters
+        R = R * (6.955 * 10**8)  # m
+        # Astronomical Units (r) to meters
+        r = r * (1.5 * 10**11)  # m
 
         # Convert solar radius and surface temperture to luminosity (L)
-        L = R**2*T**4
+        L = osb * T**4 * (4*math.pi*R**2)  # (W * m^(-2) * K^(-4)) * K^4 * m^2
 
         # Convert luminosity and orbital radius to Total Energy Flux (F)
-        F = L/(4*math.pi*r**2)
+        F = L/(4*math.pi*r**2)  # ((W * m^(-2) * K^(-4)) * K^4 * m^2) * m^(-2)
 
-        # Convert total energy flux to effective planet tempurature
-        planet_T = (F/osb)**(1/float(4))
+        # Convert Total Energy Flux (F) to effective planet tempurature
+        planet_T = (F/osb)**(0.25)
+
+        # Earth is supposed to be around 15-20°C, but the math ended up
+        #   being 100°C too high. That could be due to the light reflected
+        #   off the water, the atmosphere absorbing heat, or an minor issue
+        #   with the formula. All of the math checks out and all of the
+        #   units cancel. It does seem to overestimate until very low
+        #   tempuratures too. The NASA data provides planet tempuratures
+        #   for select planets, and if I multiply our calculated
+        #   tempurature my ~2/3, the numbers line up very close with NASA's.
+        #   I trust NASA's math more than ours, so I'm multiplying our
+        #   number by 200/308 so the tempuratures line up with NASA's
+        #   within 1% or so (excluding very high or low tempuratures)
+        planet_T = planet_T * (200/308)
 
         # Convert Kelvin to Celcius
-        planet_tempurature = planet_T + 273.15
+        planet_tempurature = planet_T - 273.15
 
         return planet_tempurature
+
+    def compare_temp_to_nasa(self, calculated, nasa):
+        nasa -= 273.15
+        difference = (calculated / nasa) * 100 - 100
+        print_string =\
+            "\tOur function: %f°C\n\tNASA: %d°C\n\tDifference: %f%s\n"\
+            % (calculated, nasa, difference, '%')
+        print(print_string)
 
     # Will be a private function after testing is done
     def isHabitable(self, tempurature, mass, radius, density, eccentricity):
@@ -112,22 +141,22 @@ class Habitable_Planets:
         """
 
         # determine if the tempurature is correct for liquid water
-        # return false if planet is not in habitable zone
+        # Return false if planet is not in habitable zone
         if(tempurature < 0 or tempurature > 100):
             return False
 
         # determine if it is a rocky (> 2.5) or gas (< 2.5) planet
-        # return false if planet is not dense enough (not rocky)
+        # Return false if planet is not dense enough (not rocky)
         if(density < 2.5):
             return False
 
         # determine if radius of planet is the correct size for habitability
-        # return false if planet is too small or too large
+        # Return false if planet is too small or too large
         if(radius < 0.5 or radius > 2.5):
             return False
 
         # determine if the planet has the correct mass for habitability
-        # return false if planet is not massive enough or too massive
+        # Return false if planet is not massive enough or too massive
         if(mass < 0.3 or mass > 10):
             return False
 

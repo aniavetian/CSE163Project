@@ -8,10 +8,10 @@ Description: We are using machine learning to answer questions, predict
     primarily focus on model accuracy. This object contains all of the
     functions that match a machine learning research question.
 """
-import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import r2_score
 
 
 class Machine_Learning:
@@ -23,10 +23,15 @@ class Machine_Learning:
         self._data = df
 
     def mass_of_planet(self):
-        new_data = self.data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                              'pl_masse', 'pl_orbeccen', 'pl_orbincl',
-                              'pl_radj', 'pl_dens', 'st_teff',
-                              'st_mass', 'st_rad']]
+        """
+        Creates a regression model that predicts the mass of an exoplanet
+            that returns the accuracy of the model in terms of a tuple
+            in the form (mean absolute error, r^2)
+        """
+        new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
+                               'pl_masse', 'pl_orbeccen', 'pl_orbincl',
+                               'pl_radj', 'pl_dens', 'st_teff',
+                               'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
         features = new_data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
@@ -35,34 +40,32 @@ class Machine_Learning:
                              'st_mass', 'st_rad']]
         labels = new_data['pl_masse']
 
-        features = pd.get_dummies(features)
-
         features_train, features_test, labels_train, labels_test = \
             train_test_split(features, labels, test_size=0.2)
 
         # Create an untrained model
-        model = DecisionTreeClassifier()
+        model = DecisionTreeRegressor()
 
         # Train it on the **training set**
         model.fit(features_train, labels_train)
 
-        # Compute training accuracy
-        train_predictions = model.predict(features_train)
-        train_acc = accuracy_score(labels_train, train_predictions)
-        print(train_acc)
-
         # Compute test accuracy
         test_predictions = model.predict(features_test)
-        test_acc = accuracy_score(labels_test, test_predictions)
-        print(test_acc)
+        test_acc = mean_absolute_error(labels_test, test_predictions)
+        test_acc_r2 = r2_score(labels_test, test_predictions)
 
-        return test_acc
+        return (test_acc, test_acc_r2)
 
     def distance_from_star(self):
-        new_data = self.data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                              'pl_masse', 'pl_orbeccen', 'pl_orbincl',
-                              'pl_radj', 'pl_dens', 'st_teff',
-                              'st_mass', 'st_rad']]
+        """
+        Creates a regression model that predicts the distance of an exoplanet
+            from its host star that returns the accuracy of the model in terms
+            of a tuple in the form (mean absolute error, r^2)
+        """
+        new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
+                               'pl_masse', 'pl_orbeccen', 'pl_orbincl',
+                               'pl_radj', 'pl_dens', 'st_teff',
+                               'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
         features = new_data[['pl_pnum', 'pl_orbper',
@@ -71,34 +74,32 @@ class Machine_Learning:
                              'st_mass', 'st_rad']]
         labels = new_data['pl_orbsmax']
 
-        features = pd.get_dummies(features)
-
         features_train, features_test, labels_train, labels_test = \
             train_test_split(features, labels, test_size=0.2)
 
         # Create an untrained model
-        model = DecisionTreeClassifier()
+        model = DecisionTreeRegressor()
 
         # Train it on the **training set**
         model.fit(features_train, labels_train)
 
-        # Compute training accuracy
-        train_predictions = model.predict(features_train)
-        train_acc = accuracy_score(labels_train, train_predictions)
-        print(train_acc)
-
         # Compute test accuracy
         test_predictions = model.predict(features_test)
-        test_acc = accuracy_score(labels_test, test_predictions)
-        print(test_acc)
+        test_acc = mean_absolute_error(labels_test, test_predictions)
+        test_acc_r2 = r2_score(labels_test, test_predictions)
 
-        return test_acc
+        return (test_acc, test_acc_r2)
 
     def eccentricity(self):
-        new_data = self.data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                              'pl_masse', 'pl_orbeccen', 'pl_orbincl',
-                              'pl_radj', 'pl_dens', 'st_teff',
-                              'st_mass', 'st_rad']]
+        """
+        Creates a regression model that predicts the eccentricity of an
+            exoplanet's orbit that returns the accuracy of the model in
+            terms of a tuple in the form (mean absolute error, r^2)
+        """
+        new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
+                               'pl_masse', 'pl_orbeccen', 'pl_orbincl',
+                               'pl_radj', 'pl_dens', 'st_teff',
+                               'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
         features = new_data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
@@ -107,56 +108,18 @@ class Machine_Learning:
                              'st_mass', 'st_rad']]
         labels = new_data['pl_orbeccen']
 
-        features = pd.get_dummies(features)
-
         features_train, features_test, labels_train, labels_test = \
             train_test_split(features, labels, test_size=0.2)
 
         # Create an untrained model
-        model = DecisionTreeClassifier()
+        model = DecisionTreeRegressor()
 
         # Train it on the **training set**
         model.fit(features_train, labels_train)
 
-        # Compute training accuracy
-        train_predictions = model.predict(features_train)
-        train_acc = accuracy_score(labels_train, train_predictions)
-        print(train_acc)
-
         # Compute test accuracy
         test_predictions = model.predict(features_test)
-        test_acc = accuracy_score(labels_test, test_predictions)
-        print(test_acc)
+        test_acc = mean_absolute_error(labels_test, test_predictions)
+        test_acc_r2 = r2_score(labels_test, test_predictions)
 
-        return test_acc
-
-    # Removing when these functions work
-    def example_machine_learning(self):
-        data = pd.read_csv('/home/mushrooms.csv')
-
-        new_data = data[['pl_pnum', 'pl_orbper', 'pl_orbsmax', 'class']]
-        new_data = new_data.dropna()
-
-        features = new_data[['cap-shape', 'cap-surface', 'cap-color']]
-        labels = new_data['class']
-
-        features = pd.get_dummies(features)
-
-        features_train, features_test, labels_train, labels_test = \
-            train_test_split(features, labels, test_size=0.3, random_state=1)
-
-        # Create an untrained model
-        model = DecisionTreeClassifier()
-
-        # Train it on the **training set**
-        model.fit(features_train, labels_train)
-
-        # Compute training accuracy
-        train_predictions = model.predict(features_train)
-        train_acc = accuracy_score(labels_train, train_predictions)
-        print(train_acc)
-
-        # Compute test accuracy
-        test_predictions = model.predict(features_test)
-        test_acc = accuracy_score(labels_test, test_predictions)
-        print(test_acc)
+        return (test_acc, test_acc_r2)
