@@ -15,7 +15,7 @@ from habitable_planets_file import Habitable_Planets
 from machine_learning_file import Machine_Learning
 
 
-def main():
+def test_habitable_planets_file(df):
     """
     Calls all methods for the Final Project
     """
