@@ -120,7 +120,7 @@ class Habitable_Planets:
                         Equilibrium Temperature [K] converted to Celcius
           mass - Planet Mass [Earth mass]
           radius - Planet Radius [Earth radii]
-          density - Planet Density Upper Unc. [g/cm**3]
+          density - Planet Density [g/cm**3]
           eccentricity - Eccentricity
 
         Description of function:
