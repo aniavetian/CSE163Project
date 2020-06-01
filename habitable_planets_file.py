@@ -1,16 +1,12 @@
 """
 Ani Avetian and Bradley Knorr
-CSE 163  Section AA and AC
+CSE 163 AC
 Assignment: Final Project
-
-Description: File contains functions that will find out if exoplanets
-are cabable of holding life and if they are in the Goldilocks zone.
+Description:
 """
-
-
 import math
-import seaborn as sns
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 class Habitable_Planets:
@@ -20,26 +16,6 @@ class Habitable_Planets:
           df - dataframe to determine if a planet is habitable
         """
         self._df = df
-
-    def get_habitable_planets(self):
-        """
-        Function will return a dataframe that contains all exo-planets that
-        are in the habitable zone.
-
-        Written By: Ani Avetian
-        """
-
-        # Create column to store calculated values for temperature
-        new_df = self._df
-        new_df['calc_temp'] = self.calculate_planet_tempurature(
-                new_df['st_rad'], new_df['st_teff'], new_df['pl_orbsmax'])
-
-        # Count how many planets are in the Goldilocks zone based on
-        # calculated temperature
-        correct_temp = (new_df['calc_temp'] >= 0) & \
-                        (new_df['calc_temp'] <= 100)
-        planets_in_habitable_zone = new_df[correct_temp]
-        return planets_in_habitable_zone
 
     def habitable_zone(self):
         """
@@ -64,30 +40,18 @@ class Habitable_Planets:
 
         # Second
         fig, [ax1, ax2] = plt.subplots(2)
-        sns.relplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r', ax=ax1)
-        sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b', ax=ax2)
+        sns.relplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
+                    ax=ax1)
+        sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b',
+                    ax=ax2)
         plt.savefig('figures/scatter.png', bbox_inches='tight')
 
         self._habitable_df = new_df
         return len(new_df)
 
     def find_life(self):
-        """
-        Function will return the number of exoplanets that are cabable of
-        supporting life.
+        return 0
 
-        Written By: Ani Avetian
-        """
-        new_df = self.get_habitable_planets()
-        new_df = new_df[['calc_temp', 'pl_masse', 'pl_rade',
-                        'pl_dens', 'pl_orbeccen']].dropna()
-        new_df['have_life'] = self.isHabitable(new_df['calc_temp'],
-                                               new_df['pl_masse'],
-                                               new_df['pl_rade'],
-                                               new_df['pl_dens'],
-                                               new_df['pl_orbeccen'])
-        print(new_df)
-        
     # Will be a private function after testing is done
     def calculate_planet_tempurature(self, R, T, r):
         """

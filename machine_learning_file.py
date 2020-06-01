@@ -12,6 +12,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import r2_score
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 
 
 class Machine_Learning:
@@ -54,6 +57,25 @@ class Machine_Learning:
         test_acc = mean_absolute_error(labels_test, test_predictions)
         test_acc_r2 = r2_score(labels_test, test_predictions)
 
+        # Plot ML vs Actual
+        fig, [ax1, ax2] = plt.subplots(2, figsize=(15, 12))
+
+        sns.distplot(test_predictions, kde=False, ax=ax1)
+        sns.distplot(labels_test, kde=False, ax=ax2)
+
+        ax1.set_title('Distribution of Predicted Mass of Planets')
+        ax1.set_xlabel('Planet Mass (Earth Masses)')
+        ax1.set_ylabel('Number of Planets')
+
+        ax2.set_title('Distribution of Actual Mass of Planets')
+        ax2.set_xlabel('Planet Mass (Earth Masses)')
+        ax2.set_ylabel('Number of Planets')
+
+        ax1.set_xlim(0, 4500)
+        ax2.set_xlim(0, 4500)
+
+        plt.savefig('files/ML_Planet_Mass.png', bbox_inches='tight')
+
         return (test_acc, test_acc_r2)
 
     def distance_from_star(self):
@@ -88,6 +110,22 @@ class Machine_Learning:
         test_acc = mean_absolute_error(labels_test, test_predictions)
         test_acc_r2 = r2_score(labels_test, test_predictions)
 
+        # Plot ML vs Actual
+        fig, [ax1, ax2] = plt.subplots(2, figsize=(15, 12))
+
+        sns.distplot(test_predictions, kde=False, ax=ax1)
+        sns.distplot(labels_test, kde=False, ax=ax2)
+
+        ax1.set_title('Distribution of Predicted Distances from Star')
+        ax1.set_xlabel('Distance from Star (AU)')
+        ax1.set_ylabel('Number of Planets')
+
+        ax2.set_title('Distribution of Actual Distances from Star')
+        ax2.set_xlabel('Distance from Star (AU)')
+        ax2.set_ylabel('Number of Planets')
+
+        plt.savefig('files/ML_Planet_Distance.png', bbox_inches='tight')
+
         return (test_acc, test_acc_r2)
 
     def eccentricity(self):
@@ -121,5 +159,21 @@ class Machine_Learning:
         test_predictions = model.predict(features_test)
         test_acc = mean_absolute_error(labels_test, test_predictions)
         test_acc_r2 = r2_score(labels_test, test_predictions)
+
+        # Plot ML vs Actual
+        fig, [ax1, ax2] = plt.subplots(2, figsize=(15, 12))
+
+        sns.distplot(test_predictions, kde=False, ax=ax1)
+        sns.distplot(labels_test, kde=False, ax=ax2)
+
+        ax1.set_title('Distribution of Predicted Eccentricities of Orbits')
+        ax1.set_xlabel('Eccentricity of Orbit')
+        ax1.set_ylabel('Number of Planets')
+
+        ax2.set_title('Distribution of Actual Eccentricities of Orbits')
+        ax2.set_xlabel('Eccentricity of Orbit')
+        ax2.set_ylabel('Number of Planets')
+
+        plt.savefig('files/ML_Eccentricity.png', bbox_inches='tight')
 
         return (test_acc, test_acc_r2)
