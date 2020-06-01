@@ -22,8 +22,8 @@ def test_habitable_planets_file(df):
     # --- Testing habitable_planets_file --- #
     Hb = Habitable_Planets(df)
 
-    # Hb.habitable_zone()
-    Hb.find_life()
+    Hb.habitable_zone()
+    # Hb.find_life()
     print('_________________________________')
 
     # tests the calculate_planet_tempurature() method

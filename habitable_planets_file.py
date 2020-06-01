@@ -62,6 +62,12 @@ class Habitable_Planets:
         plt.ylabel('Steller Mass [Solar Mass]')
         plt.savefig('figures/habitable.png', bbox_inches='tight')
 
+        # Second
+        fig, [ax1, ax2] = plt.subplots(2)
+        sns.relplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r', ax=ax1)
+        sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b', ax=ax2)
+        plt.savefig('figures/scatter.png', bbox_inches='tight')
+
         self._habitable_df = new_df
         return len(new_df)
 
