@@ -69,7 +69,21 @@ class Habitable_Planets:
         return len(new_df)
 
     def find_life(self):
-        return 0
+        """
+        Function will return the number of exoplanets that are cabable of
+        supporting life.
+
+        Written By: Ani Avetian
+        """
+        new_df = self.get_habitable_planets()
+        new_df = new_df[['calc_temp', 'pl_masse', 'pl_rade',
+                        'pl_dens', 'pl_orbeccen']].dropna()
+        new_df['have_life'] = self.isHabitable(new_df['calc_temp'],
+                                               new_df['pl_masse'],
+                                               new_df['pl_rade'],
+                                               new_df['pl_dens'],
+                                               new_df['pl_orbeccen'])
+        print(new_df)
 
     # Will be a private function after testing is done
     def calculate_planet_tempurature(self, R, T, r):
