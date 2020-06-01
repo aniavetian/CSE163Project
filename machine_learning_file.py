@@ -13,7 +13,6 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
-import pandas as pd
 import seaborn as sns
 
 
