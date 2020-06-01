@@ -14,3 +14,12 @@ class Pandas:
         Function takes in a dataframe and creates the Pandas class.
         """
         self.df = df
+
+    def average_planets(self):
+        """
+        Function computes the average number of exoplanets for each
+        solar system.
+        """
+        solar_system = df.groupby('pl_hostname')['pl_name'].count()
+        filtered = df[solar_system]
+        print(filtered)
