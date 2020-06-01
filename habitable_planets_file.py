@@ -17,6 +17,25 @@ class Habitable_Planets:
         """
         self._df = df
 
+    def get_habitable_planets(self):
+        """
+        Function will return a dataframe that contains all exo-planets that
+        are in the habitable zone.
+
+        Written By: Ani Avetian
+        """
+
+        # Create column to store calculated values for temperature
+        new_df = self._df
+        new_df['calc_temp'] = self.calculate_planet_tempurature(
+                new_df['st_rad'], new_df['st_teff'], new_df['pl_orbsmax'])
+
+        # Count how many planets are in the Goldilocks zone based on
+        # calculated temperature
+        corr_temp = (new_df['calc_temp'] >= 0) & (new_df['calc_temp'] <= 100)
+        planets_in_habitable_zone = new_df[corr_temp]
+        return planets_in_habitable_zone
+
     def habitable_zone(self):
         """
         Function will return the number of exoplanets that are in the habitable
