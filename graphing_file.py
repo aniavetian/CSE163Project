@@ -36,7 +36,7 @@ class Graphing:
         # plt.xlabel('Planet Name')
         # plt.ylabel('Planet Mass [Earth Mass]')
         # plt.title('Distribution of Masses for Exoplanets')
-        # plt.savefig('mass_dist.png', bbox_inches='tight')
+        # plt.savefig('figures/mass_dist.png', bbox_inches='tight')
 
     def distribution_distance(self):
         new_df = self._df[['pl_hostname', 'orbsmax']]

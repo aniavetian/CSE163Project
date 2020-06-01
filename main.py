@@ -19,10 +19,12 @@ def test_habitable_planets_file(df):
     """
     Calls all methods for the Final Project
     """
-    df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
-
     # --- Testing habitable_planets_file --- #
     Hb = Habitable_Planets(df)
+
+    # Hb.habitable_zone()
+    Hb.find_life()
+    print('_________________________________')
 
     # tests the calculate_planet_tempurature() method
     # comparing our tempurature predictions to NASA's
@@ -83,12 +85,12 @@ def main():
     """
     Calls all methods for the Final Project
     """
-    df = pd.read_csv("data/Exoplanets.csv")
+    df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
 
-    # test_habitable_planets_file(df)
-    # test_machine_learning_file(df)
+    test_habitable_planets_file(df)
+    test_machine_learning_file(df)
     test_pandas_file(df)
-    # test_graphing_file(df)
+    test_graphing_file(df)
 
 
 if __name__ == '__main__':

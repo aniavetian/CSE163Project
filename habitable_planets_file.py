@@ -1,10 +1,16 @@
 """
 Ani Avetian and Bradley Knorr
-CSE 163 AC
+CSE 163  Section AA and AC
 Assignment: Final Project
-Description:
+
+Description: File contains functions that will find out if exoplanets
+are cabable of holding life and if they are in the Goldilocks zone.
 """
+
+
 import math
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 class Habitable_Planets:
@@ -15,21 +21,67 @@ class Habitable_Planets:
         """
         self._df = df
 
+    def get_habitable_planets(self):
+        """
+        Function will return a dataframe that contains all exo-planets that
+        are in the habitable zone.
+
+        Written By: Ani Avetian
+        """
+
+        # Create column to store calculated values for temperature
+        new_df = self._df
+        new_df['calc_temp'] = self.calculate_planet_tempurature(
+                new_df['st_rad'], new_df['st_teff'], new_df['pl_orbsmax'])
+
+        # Count how many planets are in the Goldilocks zone based on
+        # calculated temperature
+        correct_temp = (new_df['calc_temp'] >= 0) & \
+                        (new_df['calc_temp'] <= 100)
+        planets_in_habitable_zone = new_df[correct_temp]
+        return planets_in_habitable_zone
+
     def habitable_zone(self):
         """
         Function will return the number of exoplanets that are in the habitable
         zone. Function will also plot the distance of the exoplanet to its host
-        star vs. its size so we can visually see which planets are in the
+        star vs. its stars size so we can visually see which planets are in the
         habitable zone.
+
+        Written By: Ani Avetian
         """
-        new_df = self._df
+
+        # Create new dataset with all planets in habitable zone
+        new_df = self.get_habitable_planets()
+
+        # Using the planets in the Habitable zone, we will plot their
+        # distance to thier host star vs. their star size.
+        sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, kind='line')
+        plt.title('Exoplanet Distance From Star vs. Star Size')
+        plt.xlabel('Orbit Semi-Major Axis [AU]')
+        plt.ylabel('Steller Mass [Solar Mass]')
+        plt.savefig('figures/habitable.png', bbox_inches='tight')
+
+        self._habitable_df = new_df
+        return len(new_df)
 
     def find_life(self):
         """
-        Function will...
-        """
-        pass
+        Function will return the number of exoplanets that are cabable of
+        supporting life.
 
+        Written By: Ani Avetian
+        """
+        new_df = self.get_habitable_planets()
+        new_df = new_df[['calc_temp', 'pl_masse', 'pl_rade',
+                        'pl_dens', 'pl_orbeccen']].dropna()
+        new_df['have_life'] = self.isHabitable(new_df['calc_temp'],
+                                               new_df['pl_masse'],
+                                               new_df['pl_rade'],
+                                               new_df['pl_dens'],
+                                               new_df['pl_orbeccen'])
+        print(new_df)
+        
     # Will be a private function after testing is done
     def calculate_planet_tempurature(self, R, T, r):
         """
