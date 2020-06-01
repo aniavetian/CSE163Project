@@ -16,10 +16,19 @@ class Habitable_Planets:
         self._df = df
 
     def habitable_zone(self):
-        return 0
+        """
+        Function will return the number of exoplanets that are in the habitable
+        zone. Function will also plot the distance of the exoplanet to its host
+        star vs. its size so we can visually see which planets are in the
+        habitable zone.
+        """
+        pass
 
     def find_life(self):
-        return 0
+        """
+        Function will...
+        """
+        pass
 
     # Will be a private function after testing is done
     def calculate_planet_tempurature(self, R, T, r):
