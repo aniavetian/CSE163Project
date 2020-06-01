@@ -74,7 +74,7 @@ class Machine_Learning:
         ax1.set_xlim(0, 4500)
         ax2.set_xlim(0, 4500)
 
-        plt.savefig('files/ML_Planet_Mass.png', bbox_inches='tight')
+        plt.savefig('figures/ML_Planet_Mass.png', bbox_inches='tight')
 
         return (test_acc, test_acc_r2)
 
@@ -124,7 +124,7 @@ class Machine_Learning:
         ax2.set_xlabel('Distance from Star (AU)')
         ax2.set_ylabel('Number of Planets')
 
-        plt.savefig('files/ML_Planet_Distance.png', bbox_inches='tight')
+        plt.savefig('figures/ML_Planet_Distance.png', bbox_inches='tight')
 
         return (test_acc, test_acc_r2)
 
@@ -174,6 +174,6 @@ class Machine_Learning:
         ax2.set_xlabel('Eccentricity of Orbit')
         ax2.set_ylabel('Number of Planets')
 
-        plt.savefig('files/ML_Eccentricity.png', bbox_inches='tight')
+        plt.savefig('figures/ML_Eccentricity.png', bbox_inches='tight')
 
         return (test_acc, test_acc_r2)
