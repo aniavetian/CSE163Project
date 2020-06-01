@@ -9,8 +9,8 @@ Description: Tests every function in every file
 import pandas as pd
 
 # File imports
-# from pandas_file import Pandas  # Whatever you name the class
-# from graphing_file import Graphing  # Whatever you name the class
+from pandas_file import Pandas
+from graphing_file import Graphing
 from habitable_planets_file import Habitable_Planets
 from machine_learning_file import Machine_Learning
 
@@ -19,10 +19,12 @@ def test_habitable_planets_file(df):
     """
     Calls all methods for the Final Project
     """
-    df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
-
     # --- Testing habitable_planets_file --- #
     Hb = Habitable_Planets(df)
+
+    # Hb.habitable_zone()
+    Hb.find_life()
+    print('_________________________________')
 
     # tests the calculate_planet_tempurature() method
     # comparing our tempurature predictions to NASA's
@@ -69,18 +71,21 @@ def test_machine_learning_file(df):
 
 
 def test_pandas_file(df):
-    return 0
+    pandas = Pandas(df)
+    pandas.average_planets()
+    pandas.mean_mass_planets()
 
 
 def test_graphing_file(df):
-    return 0
+    graphing = Graphing(df)
+    graphing.distribution_mass()
 
 
 def main():
     """
     Calls all methods for the Final Project
     """
-    df = pd.read_csv("data/Exoplanets.csv")
+    df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
 
     test_habitable_planets_file(df)
     test_machine_learning_file(df)
