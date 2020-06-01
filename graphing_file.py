@@ -17,13 +17,13 @@ class Graphing:
         """
         Function takes in a dataframe and initalizes a Graphing class.
         """
-        self.df = df
+        self._df = df
 
     def distribution_mass(self):
         """
         Function graphs the distribution of masses for all the exoplanets.
         """
-        new_df = self.df[['pl_name', 'pl_masse']]
+        new_df = self._df[['pl_name', 'pl_masse']]
         # new_df['spot'] = ['log0' if x >= 0 & < 10 'log10' elif x >= 10 & x <
         #  100 for x in df['pl_masse']]
         new_df = new_df.dropna()
@@ -39,5 +39,5 @@ class Graphing:
         # plt.savefig('mass_dist.png', bbox_inches='tight')
 
     def distribution_distance(self):
-        new_df = self.df[['pl_hostname', 'orbsmax']]
+        new_df = self._df[['pl_hostname', 'orbsmax']]
         new_df = new_df.dropna()

@@ -22,7 +22,7 @@ class Habitable_Planets:
         star vs. its size so we can visually see which planets are in the
         habitable zone.
         """
-        pass
+        new_df = self._df
 
     def find_life(self):
         """
