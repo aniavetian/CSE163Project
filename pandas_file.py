@@ -9,7 +9,9 @@ questions 1 and 2.
 
 
 class Pandas:
-
+    """
+    Pandas class will give us information about our data on exoplanets.
+    """
     def __init__(self, df):
         """
         Function takes in a dataframe and creates the Pandas class.

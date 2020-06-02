@@ -79,6 +79,7 @@ def test_pandas_file(df):
 def test_graphing_file(df):
     graphing = Graphing(df)
     graphing.distribution_mass()
+    graphing.distribution_distance()
 
 
 def main():
