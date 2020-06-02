@@ -58,11 +58,11 @@ class Habitable_Planets:
         plt.savefig('figures/habitable.png', bbox_inches='tight')
 
         # Second
-        fig, [ax1, ax2] = plt.subplots(2)
+        fig, ax = plt.subplots(2)
         sns.relplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
-                    ax=ax1)
+                    ax=ax, kind='scatter')
         sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b',
-                    ax=ax2)
+                    ax=ax, kind='scatter')
         plt.savefig('figures/scatter.png', bbox_inches='tight')
 
         self._habitable_df = new_df
@@ -70,20 +70,23 @@ class Habitable_Planets:
 
     def find_life(self):
         """
-        Function will return the number of exoplanets that are cabable of
-        supporting life.
+        Function will return a dataframe containing information about
+        the planets that are capable of having life.
 
         Written By: Ani Avetian
         """
         new_df = self.get_habitable_planets()
-        new_df = new_df[['calc_temp', 'pl_masse', 'pl_rade',
-                        'pl_dens', 'pl_orbeccen']].dropna()
+        new_df = new_df[['pl_hostname', 'pl_name', 'calc_temp',
+                         'pl_masse', 'pl_rade',
+                         'pl_dens', 'pl_orbeccen']].dropna()
         new_df['have_life'] = self.isHabitable(new_df['calc_temp'],
                                                new_df['pl_masse'],
                                                new_df['pl_rade'],
                                                new_df['pl_dens'],
                                                new_df['pl_orbeccen'])
-        print(new_df)
+
+        data_planets = new_df[new_df['have_life'] == True]
+        return data_planets
 
     # Will be a private function after testing is done
     def calculate_planet_tempurature(self, R, T, r):
@@ -190,49 +193,47 @@ class Habitable_Planets:
         Description of function:
             This function takes the parameters as features to determine if a
             planet is habitable. If the planet passes every test that we have
-            for habitability, returns true. Otherwise returns false if it
-            fails one test
+            for habitability, then we know it is habitable. Otherwise the
+            planet is not habitable.
 
         Return Value:
-            If the planet passes every test that we havefor habitability,
-                returns True.
-            Otherwise returns False if it fails one test
+            If the planet passes every test that we havefor habitability,sdkjbfskdbfs
+            the returned Series will have True values in it.
+            Otherwise the values in the Series will be False if even one
+            test fails.
 
         Calculations made from this website:
             https://en.wikipedia.org/wiki/Planetary_habitability
 
-        Written by: Bradley Knorr
+        Written by: Bradley Knorr and Ani Avetian
         """
 
-        # determine if the tempurature is correct for liquid water
-        # Return false if planet is not in habitable zone
-        if(tempurature < 0 or tempurature > 100):
-            return False
+        # Determine if the tempurature is correct for liquid water
+        # Return false in Series if planet is not in habitable zone
+        t = (tempurature >= 0) & (tempurature <= 100)
 
-        # determine if it is a rocky (> 2.5) or gas (< 2.5) planet
-        # Return false if planet is not dense enough (not rocky)
-        if(density < 2.5):
-            return False
+        # Determine if it is a rocky (> 2.5) or gas (< 2.5) planet
+        # Return false in Sereis if planet is not dense enough (not rocky)
+        d = (density >= 2.5)
 
-        # determine if radius of planet is the correct size for habitability
-        # Return false if planet is too small or too large
-        if(radius < 0.5 or radius > 2.5):
-            return False
+        # Determine if radius of planet is the correct size for habitability
+        # Return false in Series if planet is too small or too large
+        r = (radius >= 0.5) & (radius <= 2.5)
 
-        # determine if the planet has the correct mass for habitability
-        # Return false if planet is not massive enough or too massive
-        if(mass < 0.3 or mass > 10):
-            return False
+        # Determine if the planet has the correct mass for habitability
+        # Return false in Series if planet is not massive enough or too massive
+        m = (mass >= 0.3) & (mass <= 10)
 
-        # determine if the planet has a reasonable eccentricity for life
+        # Determine if the planet has a reasonable eccentricity for life
         # Note: in reality the eccentricity is used to determine if
         #   a planet escapes the habitable zone during its orbit as
         #   well as if tempuratures can vary too widely during its orbit
         # We are only testing if tempurature can vary too widely
-        # Return false if eccentricity is too large
-        if(eccentricity > 0.25):
-            return False
+        # Return false in Series if eccentricity is too large
+        e = eccentricity <= 0.25
 
-        # if the planet passes every test for life, return True, that it is
-        #   deemed habitable for life
-        return True
+        # Combines all series together. If the planet passed all the
+        # tests for life the value stored in the Series will be True,
+        # otherwise false.
+        values = t & d & r & m & e
+        return values

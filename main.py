@@ -22,8 +22,8 @@ def test_habitable_planets_file(df):
     # --- Testing habitable_planets_file --- #
     Hb = Habitable_Planets(df)
 
-    Hb.habitable_zone()
-    # Hb.find_life()
+    # Hb.habitable_zone()
+    Hb.find_life()
     print('_________________________________')
 
     # tests the calculate_planet_tempurature() method
@@ -88,9 +88,9 @@ def main():
     df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
 
     test_habitable_planets_file(df)
-    test_machine_learning_file(df)
-    test_pandas_file(df)
-    test_graphing_file(df)
+    #test_machine_learning_file(df)
+    #test_pandas_file(df)
+    # test_graphing_file(df)
 
 
 if __name__ == '__main__':
