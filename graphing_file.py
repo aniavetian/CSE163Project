@@ -38,8 +38,8 @@ class Graphing:
         plt.xlabel('Planet Mass [Earth Mass]')
         plt.ylabel('Number of Planets')
         plt.title('Distribution of Masses for Exoplanets')
-        plt.xscale('log')
         plt.savefig('figures/mass_dist.png', bbox_inches='tight')
+        plt.clf()
 
     def distribution_distance(self):
         """
@@ -54,6 +54,8 @@ class Graphing:
 
         # Label axis and save graph
         plt.xlabel('Planet Orbit Semi-Major Axis [AU]')
-        plt.ylabel('Number of Planets')
+        plt.ylabel('Number of Planets (log scale)')
         plt.title('Distribution of Distance of Exoplanet to Star')
+        plt.yscale('log')
         plt.savefig('figures/distance_dist.png', bbox_inches='tight')
+        plt.clf()
