@@ -21,7 +21,7 @@ class Pandas:
     def average_planets(self):
         """
         Function computes the average number of exoplanets for each
-        solar system.
+        solar system and returns that average.
         """
         solar_system = self._df.groupby('pl_hostname')['pl_name'].count()
         average = solar_system.mean()
@@ -30,7 +30,7 @@ class Pandas:
     def max_planets(self):
         """
         Function will return the max amount of planets the belong in a
-        solar system and will return the name of that solar system.
+        solar system.
         """
         max_mask = self._df['pl_pnum'] == self._df['pl_pnum'].max()
         new_df = self._df[max_mask]
@@ -39,7 +39,9 @@ class Pandas:
     def mean_mass_planets(self):
         """
         Function computes the mean mass for exoplanets for each solar
-        system. The mass is measured in 'earth masses'.
+        system. The mass is measured in 'earth masses'. The function
+        will return a dataframe with every solar system and its average
+        mass.
         """
         new_df = self._df[['pl_hostname', 'pl_masse']]
         new_df = new_df.dropna()

@@ -15,7 +15,7 @@ import seaborn as sns
 class Graphing:
     """
     Graphing class contains functions that give us information
-    about exoplanets visually.
+    about exoplanets visually, by plotting them.
     """
     def __init__(self, df):
         """
