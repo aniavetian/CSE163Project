@@ -2,7 +2,7 @@
 Ani Avetian and Bradley Knorr
 CSE 163 AA and AC
 Assignment: Final Project
-Description: Tests every function in every file
+Description: Tests every function in every file.
 """
 
 # Python import
@@ -17,16 +17,24 @@ from machine_learning_file import Machine_Learning
 
 def test_habitable_planets_file(df):
     """
-    Calls all methods for the Final Project
+    Function tests the habitable plaents file.
     """
+    print('_______Testing Habitable Planets File_______')
     # --- Testing habitable_planets_file --- #
     Hb = Habitable_Planets(df)
 
-    # Hb.habitable_zone()
-    Hb.find_life()
-    print('_________________________________')
+    # Tests the habitable_zone() method and find_life method.
+    # Note: The find life method calculation was done manually
+    # on dataframe. In folder 'Files' there is the manual
+    # calulation.
+    number_in_hb_zone = Hb.habitable_zone()
+    life_df = Hb.find_life()
+    print(number_in_hb_zone)
+    print(life_df['pl_name'])
 
-    # tests the calculate_planet_tempurature() method
+    print('_______________Placeholder_______________')
+
+    # Tests the calculate_planet_tempurature() method
     # comparing our tempurature predictions to NASA's
     print("\n  Compare our temperature predictions to NASA's:")
     planet_temp = Hb.calculate_planet_tempurature(0.79, 5075, 0.1055)
@@ -49,6 +57,10 @@ def test_habitable_planets_file(df):
 
 
 def test_machine_learning_file(df):
+    """
+    Function testes the machine learning file
+    """
+    print('_______Testing Machine Learning File_______')
     ml = Machine_Learning(df)
     print("  MAE: Close to 0 is good | r^2: Close to 1 is good")
 
@@ -71,12 +83,22 @@ def test_machine_learning_file(df):
 
 
 def test_pandas_file(df):
+    """
+    Function tests the pandas file.
+    """
+    print('_______Testing Pandas File_______')
     pandas = Pandas(df)
-    pandas.average_planets()
-    pandas.mean_mass_planets()
+    average_planets = pandas.average_planets()
+    average_mean = pandas.mean_mass_planets()
+    print(average_planets)
+    average_mean.head()
 
 
 def test_graphing_file(df):
+    """
+    Function tests the graphing file
+    """
+    print('_______Testing Graphing File_______')
     graphing = Graphing(df)
     graphing.distribution_mass()
     graphing.distribution_distance()

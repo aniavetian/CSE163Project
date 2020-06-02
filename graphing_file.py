@@ -51,7 +51,7 @@ class Graphing:
         # Plot distribution
         sns.distplot(new_df['pl_orbsmax'], kde=False)
 
-        #Label axis and save graph
+        # Label axis and save graph
         plt.xlabel('Planet Orbit Semi-Major Axis [AU]')
         plt.ylabel('Number of Planets')
         plt.title('Distribution of Distance of Exoplanet to Star')

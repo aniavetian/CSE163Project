@@ -58,12 +58,12 @@ class Habitable_Planets:
         plt.savefig('figures/habitable.png', bbox_inches='tight')
 
         # Second
-        fig, ax = plt.subplots(2)
-        sns.relplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
-                    ax=ax, kind='scatter')
-        sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b',
-                    ax=ax, kind='scatter')
-        plt.savefig('figures/scatter.png', bbox_inches='tight')
+        #fig, ax = plt.subplots(2)
+        #sns.relplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
+        #            ax=ax, kind='scatter')
+        #sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b',
+        #            ax=ax, kind='scatter')
+        #plt.savefig('figures/scatter.png', bbox_inches='tight')
 
         self._habitable_df = new_df
         return len(new_df)
