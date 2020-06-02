@@ -31,8 +31,9 @@ def test_habitable_planets_file(df):
     life_df = Hb.find_life()
     print(number_in_hb_zone)
     print(life_df['pl_name'])
+    print()
 
-    print('_______________Placeholder_______________')
+    print('\t_______Testing Temperature Calculation and Life Function_______')
 
     # Tests the calculate_planet_tempurature() method
     # comparing our tempurature predictions to NASA's
@@ -53,7 +54,8 @@ def test_habitable_planets_file(df):
     # testing the isHabitable() method
     # testing earth's habitability (should return true)
     habitable = Hb.isHabitable(15, 1, 1, 5.1, 0.02)
-    print("  Earth's habitability: %s\n" % (habitable))
+    print("  Earth's habitability: %s" % (habitable))
+    print()
 
 
 def test_machine_learning_file(df):
@@ -78,7 +80,6 @@ def test_machine_learning_file(df):
     eccentricity_accuracy = ml.eccentricity()
     print("\tEccentricity Accuracy: %f (MAE), %f (r^2)"
           % (eccentricity_accuracy[0], eccentricity_accuracy[1]))
-
     print()
 
 
@@ -91,8 +92,9 @@ def test_pandas_file(df):
     average_planets = pandas.average_planets()
     max_planets = pandas.max_planets()
     average_mean = pandas.mean_mass_planets()
-    print(average_planets)
-    print(max_planets)
+    print("Average number of planets per solar system: %f" % (average_planets))
+    print("Max number of planets in a solar system: %d" % (max_planets))
+    print("Mean mass planets in each solar system:")
     print(average_mean)
 
 
@@ -103,7 +105,10 @@ def test_graphing_file(df):
     print('_______Testing Graphing File_______')
     graphing = Graphing(df)
     graphing.distribution_mass()
+    print("Created mass_dist.png")
     graphing.distribution_distance()
+    print("Created distance_dist.png")
+    print()
 
 
 def main():
@@ -113,9 +118,9 @@ def main():
     df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
 
     test_habitable_planets_file(df)
-    #test_graphing_file(df)
-    #test_machine_learning_file(df)
-    #test_pandas_file(df)
+    test_graphing_file(df)
+    test_machine_learning_file(df)
+    test_pandas_file(df)
 
 
 if __name__ == '__main__':

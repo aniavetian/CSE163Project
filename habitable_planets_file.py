@@ -58,6 +58,7 @@ class Habitable_Planets:
         plt.xlabel('Orbit Semi-Major Axis [AU]')
         plt.ylabel('Steller Mass [Solar Mass]')
         plt.savefig('figures/habitable_linear.png', bbox_inches='tight')
+        plt.clf()
 
         # log version
         sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, kind='line')
@@ -67,6 +68,7 @@ class Habitable_Planets:
         plt.xscale('log')
         plt.yscale('log')
         plt.savefig('figures/habitable_log.png', bbox_inches='tight')
+        plt.clf()
 
         # Scatter Plot
         fig, ax = plt.subplots(1)
@@ -90,6 +92,7 @@ class Habitable_Planets:
         plt.legend()
 
         plt.savefig('figures/scatter_habitable.png', bbox_inches='tight')
+        plt.clf()
 
         return len(new_df)
 
@@ -138,6 +141,7 @@ class Habitable_Planets:
         plt.legend()
 
         plt.savefig('figures/scatter_life.png', bbox_inches='tight')
+        plt.clf()
 
         return data_planets
 
