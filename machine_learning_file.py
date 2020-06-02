@@ -31,13 +31,13 @@ class Machine_Learning:
             in the form (mean absolute error, r^2)
         """
         new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                               'pl_masse', 'pl_orbeccen', 'pl_orbincl',
+                               'pl_masse', 'pl_orbeccen',
                                'pl_radj', 'pl_dens', 'st_teff',
                                'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
         features = new_data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                             'pl_orbeccen', 'pl_orbincl',
+                             'pl_orbeccen',
                              'pl_radj', 'pl_dens', 'st_teff',
                              'st_mass', 'st_rad']]
         labels = new_data['pl_masse']
@@ -84,13 +84,13 @@ class Machine_Learning:
             of a tuple in the form (mean absolute error, r^2)
         """
         new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                               'pl_masse', 'pl_orbeccen', 'pl_orbincl',
+                               'pl_masse', 'pl_orbeccen',
                                'pl_radj', 'pl_dens', 'st_teff',
                                'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
         features = new_data[['pl_pnum', 'pl_orbper',
-                             'pl_masse', 'pl_orbeccen', 'pl_orbincl',
+                             'pl_masse', 'pl_orbeccen',
                              'pl_radj', 'pl_dens', 'st_teff',
                              'st_mass', 'st_rad']]
         labels = new_data['pl_orbsmax']
@@ -134,13 +134,13 @@ class Machine_Learning:
             terms of a tuple in the form (mean absolute error, r^2)
         """
         new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                               'pl_masse', 'pl_orbeccen', 'pl_orbincl',
+                               'pl_masse', 'pl_orbeccen',
                                'pl_radj', 'pl_dens', 'st_teff',
                                'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
         features = new_data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                             'pl_masse', 'pl_orbincl',
+                             'pl_masse',
                              'pl_radj', 'pl_dens', 'st_teff',
                              'st_mass', 'st_rad']]
         labels = new_data['pl_orbeccen']

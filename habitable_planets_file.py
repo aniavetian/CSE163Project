@@ -52,20 +52,44 @@ class Habitable_Planets:
 
         # Using the planets in the Habitable zone, we will plot their
         # distance to thier host star vs. their star size.
+        # linear version
         sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, kind='line')
-        plt.title('Exoplanet Distance From Star vs. Star Size')
+        plt.title('Exoplanet Distance From Star vs. Star Mass')
         plt.xlabel('Orbit Semi-Major Axis [AU]')
         plt.ylabel('Steller Mass [Solar Mass]')
-        plt.savefig('figures/habitable.png', bbox_inches='tight')
+        plt.savefig('figures/habitable_linear.png', bbox_inches='tight')
+
+        # log version
+        sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, kind='line')
+        plt.title('Exoplanet Distance From Star vs. Star Mass')
+        plt.xlabel('Orbit Semi-Major Axis [AU]')
+        plt.ylabel('Steller Mass [Solar Mass]')
+        plt.xscale('log')
+        plt.yscale('log')
+        plt.savefig('figures/habitable_log.png', bbox_inches='tight')
 
         # Scatter Plot
         fig, ax = plt.subplots(1)
+
         sns.regplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
-                    marker='+', ax=ax, logx=True)
+                    marker='o', label='Not in Habitable Zone',
+                    fit_reg=False, scatter_kws={'s': 3}, ax=ax)
         sns.regplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b',
-                    marker='+', ax=ax, logx=True)
+                    marker='o', label='Habitable Zone',
+                    fit_reg=False, scatter_kws={'s': 8}, ax=ax)
+
         plt.xscale('log')
-        plt.savefig('figures/scatter.png', bbox_inches='tight')
+        plt.yscale('log')
+        plt.xlim(0.005, 100)
+        plt.ylim(0.05, 10)
+
+        plt.title("Exoplanet Distance From Star vs. Star Mass")
+        plt.xlabel("Distance from Star (AU)")
+        plt.ylabel("Mass of Star (Stellar Masses)")
+
+        plt.legend()
+
+        plt.savefig('figures/scatter_habitable.png', bbox_inches='tight')
 
         return len(new_df)
 
@@ -76,17 +100,45 @@ class Habitable_Planets:
 
         Written By: Ani Avetian
         """
-        new_df = self.get_habitable_planets()
-        new_df = new_df[['pl_hostname', 'pl_name', 'calc_temp',
-                         'pl_masse', 'pl_rade',
-                         'pl_dens', 'pl_orbeccen']].dropna()
+        df_habitable = self.get_habitable_planets()
+        new_df = df_habitable[['pl_hostname', 'pl_name', 'calc_temp',
+                               'pl_masse', 'pl_rade',
+                               'pl_dens', 'pl_orbeccen', 'st_mass',
+                               'pl_orbsmax']].dropna()
         new_df['have_life'] = self.isHabitable(new_df['calc_temp'],
                                                new_df['pl_masse'],
                                                new_df['pl_rade'],
                                                new_df['pl_dens'],
                                                new_df['pl_orbeccen'])
 
-        data_planets = new_df[new_df['have_life'] == True]
+        data_planets = new_df[new_df['have_life']]
+
+        # Scatter Plot
+        fig, ax = plt.subplots(1)
+
+        sns.regplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
+                    marker='o', label='Not in Habitable Zone',
+                    fit_reg=False, scatter_kws={'s': 3}, ax=ax)
+        sns.regplot(x='pl_orbsmax', y='st_mass', data=df_habitable, color='b',
+                    marker='o', label='Habitable Zone',
+                    fit_reg=False, scatter_kws={'s': 8}, ax=ax)
+        sns.regplot(x='pl_orbsmax', y='st_mass', data=data_planets, color='g',
+                    marker='o', label='Potential for Life',
+                    fit_reg=False, scatter_kws={'s': 100}, ax=ax)
+
+        plt.xscale('log')
+        plt.yscale('log')
+        plt.xlim(0.005, 100)
+        plt.ylim(0.05, 10)
+
+        plt.title("Exoplanet Distance From Star vs. Star Mass")
+        plt.xlabel("Distance from Star (AU)")
+        plt.ylabel("Mass of Star (Stellar Masses)")
+
+        plt.legend()
+
+        plt.savefig('figures/scatter_life.png', bbox_inches='tight')
+
         return data_planets
 
     # Will be a private function after testing is done
@@ -190,6 +242,9 @@ class Habitable_Planets:
           radius - Planet Radius [Earth radii]
           density - Planet Density [g/cm**3]
           eccentricity - Eccentricity
+          s_mass - mass of star (only used to return column for dataframe)
+          distance - distance from star (only used to return column for
+                     dataframe)
 
         Description of function:
             This function takes the parameters as features to determine if a
