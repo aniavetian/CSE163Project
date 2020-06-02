@@ -4,7 +4,7 @@
 > Our project is on Exoplanets and on informing the public about what lies ouside our solar
 > system. Below are the steps on how to run our project.
 
-## How to Run Our Project:
+## How to Download Our Data:
 > 1. Go to this [website](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=planets).
 >       * [Documentation](https://exoplanetarchive.ipac.caltech.edu/docs/API_exoplanet_columns.html)
 >       for our dataset.
@@ -40,3 +40,15 @@
 >       * Discovery Facility
 > 6. Once everything is selected, hover over **'Download Table'**. A menu should pop up and you can
 > click **'Download Table'** at the bottom of the list.
+
+## How to Run the Project:
+> 1. Open up the `main.py` file.
+> 2. Run that file
+> 
+> This file will run every function from each file. The results for the function will be printed
+> out. Some of our functions produce graphs. To view them go into the `figures` folder and all plot
+> will be there.
+
+## Other Information:
+> - The `Files` folder contains notes and manual caluclations we did.
+> - The `data` folder contains our dataset
