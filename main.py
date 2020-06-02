@@ -89,9 +89,11 @@ def test_pandas_file(df):
     print('_______Testing Pandas File_______')
     pandas = Pandas(df)
     average_planets = pandas.average_planets()
+    max_planets = pandas.max_planets()
     average_mean = pandas.mean_mass_planets()
     print(average_planets)
-    average_mean.head()
+    print(max_planets)
+    print(average_mean)
 
 
 def test_graphing_file(df):
@@ -111,9 +113,9 @@ def main():
     df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
 
     test_habitable_planets_file(df)
-    test_machine_learning_file(df)
-    test_pandas_file(df)
-    test_graphing_file(df)
+    #test_graphing_file(df)
+    #test_machine_learning_file(df)
+    #test_pandas_file(df)
 
 
 if __name__ == '__main__':

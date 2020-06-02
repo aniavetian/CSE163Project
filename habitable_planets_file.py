@@ -38,10 +38,11 @@ class Habitable_Planets:
 
     def habitable_zone(self):
         """
-        Function will return the number of exoplanets that are in the habitable
-        zone. Function will also plot the distance of the exoplanet to its host
-        star vs. its stars size so we can visually see which planets are in the
-        habitable zone.
+        Function will compute the number of exoplanets that are in the
+        habitable zone and return that value. Function will also plot
+        the distance of the exoplanet(using the semi major axis [AU])
+        to its host star vs. its stars size so we can visually see
+        which planets are in the habitable zone.
 
         Written By: Ani Avetian
         """
@@ -57,15 +58,15 @@ class Habitable_Planets:
         plt.ylabel('Steller Mass [Solar Mass]')
         plt.savefig('figures/habitable.png', bbox_inches='tight')
 
-        # Second
-        #fig, ax = plt.subplots(2)
-        #sns.relplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
-        #            ax=ax, kind='scatter')
-        #sns.relplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b',
-        #            ax=ax, kind='scatter')
-        #plt.savefig('figures/scatter.png', bbox_inches='tight')
+        # Scatter Plot
+        fig, ax = plt.subplots(1)
+        sns.regplot(x='pl_orbsmax', y='st_mass', data=self._df, color='r',
+                    marker='+', ax=ax, logx=True)
+        sns.regplot(x='pl_orbsmax', y='st_mass', data=new_df, color='b',
+                    marker='+', ax=ax, logx=True)
+        plt.xscale('log')
+        plt.savefig('figures/scatter.png', bbox_inches='tight')
 
-        self._habitable_df = new_df
         return len(new_df)
 
     def find_life(self):
