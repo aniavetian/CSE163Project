@@ -197,7 +197,7 @@ class Habitable_Planets:
             planet is not habitable.
 
         Return Value:
-            If the planet passes every test that we havefor habitability,sdkjbfskdbfs
+            If the planet passes every test that we have for habitability,
             the returned Series will have True values in it.
             Otherwise the values in the Series will be False if even one
             test fails.
