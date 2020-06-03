@@ -2,7 +2,10 @@
 Ani Avetian and Bradley Knorr
 CSE 163 AC
 Assignment: Final Project
-Description:
+
+Description: This file contains the class that answer questions
+3 and 4. The file will contain functions that are able to
+calculate habitbale planets.
 """
 import math
 import matplotlib.pyplot as plt
@@ -39,10 +42,11 @@ class Habitable_Planets:
     def habitable_zone(self):
         """
         Function will compute the number of exoplanets that are in the
-        habitable zone and return that value. Function will also plot
+        habitable zone and return that value. Function will plot
         the distance of the exoplanet(using the semi major axis [AU])
         to its host star vs. its stars size so we can visually see
-        which planets are in the habitable zone.
+        which planets are in the habitable zone. Function will also
+        plot a scatter plot for habitable planets vs the whole dataset.
 
         Written By: Ani Avetian
         """
@@ -99,7 +103,10 @@ class Habitable_Planets:
     def find_life(self):
         """
         Function will return a dataframe containing information about
-        the planets that are capable of having life.
+        the planets that are capable of having life. Function will also
+        plot a scatter plot of the planets that could have life against
+        the whole dataset. Using the plot we can see where those planets
+        are in the distance from star vs stellar mass.
 
         Written By: Ani Avetian
         """
