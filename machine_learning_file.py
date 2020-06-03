@@ -29,6 +29,8 @@ class Machine_Learning:
         Creates a regression model that predicts the mass of an exoplanet
             that returns the accuracy of the model in terms of a tuple
             in the form (mean absolute error, r^2)
+        Also creates a plot comparing the predicted results to the
+            actual results
         """
         new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
                                'pl_masse', 'pl_orbeccen',
@@ -82,6 +84,8 @@ class Machine_Learning:
         Creates a regression model that predicts the distance of an exoplanet
             from its host star that returns the accuracy of the model in terms
             of a tuple in the form (mean absolute error, r^2)
+        Also creates a plot comparing the predicted results to the
+            actual results
         """
         new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
                                'pl_masse', 'pl_orbeccen',
@@ -131,7 +135,9 @@ class Machine_Learning:
         """
         Creates a regression model that predicts the eccentricity of an
             exoplanet's orbit that returns the accuracy of the model in
-            terms of a tuple in the form (mean absolute error, r^2)
+            terms of a tuple in the form (mean absolute error, r^2).
+        Also creates a plot comparing the predicted results to the
+            actual results
         """
         new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
                                'pl_masse', 'pl_orbeccen',

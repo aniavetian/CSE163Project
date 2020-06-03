@@ -48,7 +48,7 @@ class Habitable_Planets:
         which planets are in the habitable zone. Function will also
         plot a scatter plot for habitable planets vs the whole dataset.
 
-        Written By: Ani Avetian
+        Written By: Ani Avetian and Bradley Knorr
         """
 
         # Create new dataset with all planets in habitable zone
