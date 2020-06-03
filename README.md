@@ -49,6 +49,10 @@
 > out. Some of our functions produce graphs. To view them go into the `figures` folder and all plot
 > will be there.
 
+## How to Interpret Results:
+> Our `main.py` file outlines what each of the returned values mean and will let the client
+> know which file it is testing. 
+
 ## Other Information:
 > - The `Files` folder contains notes and manual caluclations we did.
-> - The `data` folder contains our dataset
+> - The `data` folder contains our dataset.
