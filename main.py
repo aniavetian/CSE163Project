@@ -18,7 +18,7 @@ from machine_learning_file import Machine_Learning
 
 def test_habitable_planets_file(df):
     """
-    Function tests the habitable plaents file.
+    Function takes in a dataframe and tests the habitable plaents file.
     """
     print('_______Testing Habitable Planets File_______')
     # --- Testing habitable_planets_file --- #
@@ -62,7 +62,7 @@ def test_habitable_planets_file(df):
 
 def test_machine_learning_file(df):
     """
-    Function tests the machine learning file
+    Function takes in a dataframe and tests the machine learning file.
     """
     print('_______Testing Machine Learning File_______')
     ml = Machine_Learning(df)
@@ -85,11 +85,13 @@ def test_machine_learning_file(df):
     print()
 
 
-def test_pandas_file(df):
+def test_pandas_file(df, smaller_df):
     """
-    Function tests the pandas file.
+    Function takes in a dataframe and tests the pandas file.
     """
     print('_______Testing Pandas File_______')
+
+    print('Testing Big DataFrame...')
     pandas = Pandas(df)
     average_planets = pandas.average_planets()
     max_planets = pandas.max_planets()
@@ -99,10 +101,24 @@ def test_pandas_file(df):
     print("Mean mass planets in each solar system:")
     print(average_mean)
 
+    print()
+    print('Testing Smaller DataFrame...')
+    pandas_smaller = Pandas(smaller_df)
+    average_planets_s = pandas_smaller.average_planets()
+    max_planets_s = pandas_smaller.max_planets()
+    average_mean_s = pandas_smaller.mean_mass_planets()
+    print("Average number of planets per solar system (smaller dataset): %f"
+          % (average_planets_s))
+    print("Max number of planets in a solar system (smaller dataset): %d"
+          % (max_planets_s))
+    print("Mean mass planets in each solar system (smaller dataset):")
+    print(average_mean_s)
+
 
 def test_graphing_file(df):
     """
-    Function tests the graphing file
+    Function takes in a dataframe and a smaller subset of that
+    dataframe and tests the graphing file.
     """
     print('_______Testing Graphing File_______')
     graphing = Graphing(df)
@@ -118,11 +134,12 @@ def main():
     Calls all methods for the Final Project
     """
     df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
+    smaller_df = df.loc[0:9]
 
     test_graphing_file(df)
     test_habitable_planets_file(df)
     test_machine_learning_file(df)
-    test_pandas_file(df)
+    test_pandas_file(df, smaller_df)
 
 
 if __name__ == '__main__':
