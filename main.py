@@ -53,6 +53,22 @@ def test_habitable_planets_file(df):
     planet_temp = Hb.calculate_planet_tempurature(1.53, 5794, 18)
     Hb.compare_temp_to_nasa(planet_temp, 171)  # ~171
 
+    print("  TRAPPIST-1b:")
+    TRAPPIST_1b = Hb.calculate_planet_tempurature(0.12, 2559, 0.01111)
+    Hb.compare_temp_to_nasa(TRAPPIST_1b, 0)
+    print("  TRAPPIST-1c:")
+    TRAPPIST_1c = Hb.calculate_planet_tempurature(0.12, 2559, 0.01521)
+    Hb.compare_temp_to_nasa(TRAPPIST_1c, 0)
+    print("  TRAPPIST-1d:")
+    TRAPPIST_1d = Hb.calculate_planet_tempurature(0.12, 2559, 0.02144)
+    Hb.compare_temp_to_nasa(TRAPPIST_1d, 0)
+    print("  TRAPPIST-1e:")
+    TRAPPIST_1e = Hb.calculate_planet_tempurature(0.12, 2559, 0.02817)
+    Hb.compare_temp_to_nasa(TRAPPIST_1e, 0)
+    print("  Kepler-452b:")
+    kepler_452b = Hb.calculate_planet_tempurature(1.11, 5757, 1.046)
+    Hb.compare_temp_to_nasa(kepler_452b, 265.15)
+
     # testing the isHabitable() method
     # testing earth's habitability (should return true)
     habitable = Hb.isHabitable(15, 1, 1, 5.1, 0.02)
