@@ -40,18 +40,37 @@ def test_habitable_planets_file(df):
     # Tests the calculate_planet_tempurature() method
     # comparing our tempurature predictions to NASA's
     print("\n  Compare our temperature predictions to NASA's:")
-    planet_temp = Hb.calculate_planet_tempurature(0.79, 5075, 0.1055)
-    Hb.compare_temp_to_nasa(planet_temp, 600)  # ~600
+    # Hot Planets
     planet_temp = Hb.calculate_planet_tempurature(1.37, 6440, 0.0436)
     Hb.compare_temp_to_nasa(planet_temp, 1657)  # ~1657
+    planet_temp = Hb.calculate_planet_tempurature(0.79, 5075, 0.1055)
+    Hb.compare_temp_to_nasa(planet_temp, 600)  # ~600
+    # Mild planets
     planet_temp = Hb.calculate_planet_tempurature(0.47, 3660, 0.05023)
     Hb.compare_temp_to_nasa(planet_temp, 496)  # ~496
     planet_temp = Hb.calculate_planet_tempurature(0.47, 3660, 0.11283)
     Hb.compare_temp_to_nasa(planet_temp, 331)  # ~331
+    # Cold planets
     planet_temp = Hb.calculate_planet_tempurature(0.73, 4890, 1.89)
     Hb.compare_temp_to_nasa(planet_temp, 131)  # ~131
     planet_temp = Hb.calculate_planet_tempurature(1.53, 5794, 18)
     Hb.compare_temp_to_nasa(planet_temp, 171)  # ~171
+
+    print("  TRAPPIST-1b:")
+    TRAPPIST_1b = Hb.calculate_planet_tempurature(0.12, 2559, 0.01111)
+    Hb.compare_temp_to_nasa(TRAPPIST_1b, 400)
+    print("  TRAPPIST-1c:")
+    TRAPPIST_1c = Hb.calculate_planet_tempurature(0.12, 2559, 0.01521)
+    Hb.compare_temp_to_nasa(TRAPPIST_1c, 342)
+    print("  TRAPPIST-1d:")
+    TRAPPIST_1d = Hb.calculate_planet_tempurature(0.12, 2559, 0.02144)
+    Hb.compare_temp_to_nasa(TRAPPIST_1d, 288)
+    print("  TRAPPIST-1e:")
+    TRAPPIST_1e = Hb.calculate_planet_tempurature(0.12, 2559, 0.02817)
+    Hb.compare_temp_to_nasa(TRAPPIST_1e, 251)
+    print("  Kepler-452b:")
+    kepler_452b = Hb.calculate_planet_tempurature(1.11, 5757, 1.046)
+    Hb.compare_temp_to_nasa(kepler_452b, 265.15)
 
     # testing the isHabitable() method
     # testing earth's habitability (should return true)

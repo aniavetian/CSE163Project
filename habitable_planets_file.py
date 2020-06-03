@@ -152,7 +152,6 @@ class Habitable_Planets:
 
         return data_planets
 
-    # Will be a private function after testing is done
     def calculate_planet_tempurature(self, R, T, r):
         """
         Parameters:
@@ -242,7 +241,6 @@ class Habitable_Planets:
             % (calculated, nasa, difference, '%')
         print(print_string)
 
-    # Will be a private function after testing is done
     def isHabitable(self, tempurature, mass, radius, density, eccentricity):
         """
         Parameters:
