@@ -38,8 +38,10 @@
 >       * Transit Duration Lower Unc. [days]
 >       * Transit Duration Limit Flag
 >       * Discovery Facility
-> 6. Once everything is selected, hover over **'Download Table'**. A menu should pop up and you can
-> click **'Download Table'** at the bottom of the list.
+> 6. Once everything is selected, click the **Update** button on top of the select columns menu.
+> 7. Once updated you may close out the menu containing the columns.
+> 7. Hover over **'Download Table'** in the top left corner. A menu should pop up and you can
+>    click **'Download Table'** at the bottom of the list.
 
 ## How to Run the Project:
 > 1. Open up the `main.py` file.
