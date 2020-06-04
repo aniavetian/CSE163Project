@@ -43,6 +43,9 @@
 
 ## How to Run the Project:
 > 1. Open up the `main.py` file.
+> 2. Make sure to have the standard `cse163` environment.
+>       * Environment includes libraries like pandas, seaborn, matplotlib, math and the
+>           machine learning libraries.
 > 2. Run that file
 > 
 > `main.py` will run each function from: `pandas_file.py`, `graphing_file.py`,
