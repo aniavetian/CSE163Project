@@ -1,6 +1,6 @@
 """
 Ani Avetian and Bradley Knorr
-CSE 163 AC
+CSE 163 Section AA and AC
 Assignment: Final Project
 
 Description: This file contains the class that answer questions

@@ -1,6 +1,6 @@
 """
 Ani Avetian and Bradley Knorr
-CSE 163 AA and AC
+CSE 163 Section AA and AC
 Assignment: Final Project
 
 Description: Tests every function in every file.
@@ -108,7 +108,7 @@ def test_pandas_file(df, smaller_df):
     """
     Function takes in a dataframe and tests the pandas file.
     Function also takes in a smaller subset of the dataframe
-    and tests the pandas dile as well.
+    and tests the pandas file as well.
     """
     print('_______Testing Pandas File_______')
 

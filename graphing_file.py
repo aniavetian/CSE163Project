@@ -4,7 +4,7 @@ May 31, 2020
 CSE 163 Section AA
 
 Description: File contains functions that answer questions 8
-and 9.
+and 9. These questions all have to do with graphing.
 """
 
 
