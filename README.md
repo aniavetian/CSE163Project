@@ -45,9 +45,10 @@
 > 1. Open up the `main.py` file.
 > 2. Run that file
 > 
-> This file will run every function from each file. The results for the function will be printed
-> out. Some of our functions produce graphs. To view them go into the `figures` folder and all plot
-> will be there.
+> `main.py` will run each function from: `pandas_file.py`, `graphing_file.py`,
+> `habitable_planets_file.py`, and `machine_learning.py`. The output will tell you which file is
+> run and in what order. The results for the functions will be printed out. Some of our functions
+> produce graphs. To view them go into the `figures` folder and all plot will be there.
 
 ## How to Interpret Results:
 > Our `main.py` file outlines what each of the returned values mean and will let the client
