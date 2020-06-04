@@ -40,8 +40,13 @@
 >       * Discovery Facility
 > 6. Once everything is selected, click the **Update** button on top of the select columns menu.
 > 7. Once updated you may close out the menu containing the columns.
-> 7. Hover over **'Download Table'** in the top left corner. A menu should pop up and you can
+> 8. Hover over **'Download Table'** in the top left corner. A menu should pop up and you can
 >    click **'Download Table'** at the bottom of the list.
+> 9. Place the downloaded dataset in the `data` folder. 
+>       * Note: The datset will contain text at the top of the file talking about what the name
+>         of earch column stands for. Our code handles skipping these lines and moving onto the dataset.
+>         **DO NOT DELETE THIS TEXT**
+> 10. **The datset is now ready to be used.**
 
 ## How to Run the Project:
 > 1. Open up the `main.py` file.
