@@ -107,12 +107,14 @@ def test_machine_learning_file(df):
 def test_pandas_file(df, smaller_df):
     """
     Function takes in a dataframe and tests the pandas file.
+    Function also takes in a smaller subset of the dataframe
+    and tests the pandas dile as well.
     """
     print('_______Testing Pandas File_______')
 
     print('Testing Big DataFrame...')
     pandas = Pandas(df)
-    average_planets = pandas.average_planets()
+    average_planets = pandas.average_planets(True)
     max_planets = pandas.max_planets()
     average_mean = pandas.mean_mass_planets()
     print("Average number of planets per solar system: %f" % (average_planets))
@@ -123,7 +125,7 @@ def test_pandas_file(df, smaller_df):
     print()
     print('Testing Smaller DataFrame...')
     pandas_smaller = Pandas(smaller_df)
-    average_planets_s = pandas_smaller.average_planets()
+    average_planets_s = pandas_smaller.average_planets(False)
     max_planets_s = pandas_smaller.max_planets()
     average_mean_s = pandas_smaller.mean_mass_planets()
     print("Average number of planets per solar system (smaller dataset): %f"
@@ -156,9 +158,9 @@ def main():
     smaller_df = df.loc[0:9]
 
     test_graphing_file(df)
+    test_pandas_file(df, smaller_df)
     test_habitable_planets_file(df)
     test_machine_learning_file(df)
-    test_pandas_file(df, smaller_df)
 
 
 if __name__ == '__main__':

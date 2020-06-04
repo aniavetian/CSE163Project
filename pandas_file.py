@@ -7,6 +7,9 @@ Description: File contains Pandas class which computes answers to
 questions 1 and 2.
 """
 
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 class Pandas:
     """
@@ -18,12 +21,24 @@ class Pandas:
         """
         self._df = df
 
-    def average_planets(self):
+    def average_planets(self, plot):
         """
-        Function computes the average number of exoplanets for each
+        Function takes in a boolean value to tell the function if it should
+        plot a plot of number of planets per solar system vs. number of
+        solar systems with that many planets. If True the plot will be plotted.
+        The function also computes the average number of exoplanets for each
         solar system and returns that average.
         """
         solar_system = self._df.groupby('pl_hostname')['pl_name'].count()
+
+        if plot:
+            sns.distplot(solar_system, kde=False)
+            plt.title('Number of Planets Per Solar System')
+            plt.xlabel('Number of Planets')
+            plt.ylabel('Number of Solar Systems')
+            plt.yscale('log')
+            plt.savefig('figures/average_planets.png', bbox_inches='tight')
+
         average = solar_system.mean()
         return average
 
