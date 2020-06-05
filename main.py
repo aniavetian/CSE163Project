@@ -20,6 +20,7 @@ def test_habitable_planets_file(df):
     """
     Function takes in a dataframe and tests the habitable plaents file.
     """
+    print()
     print('_______Testing Habitable Planets File_______')
     # --- Testing habitable_planets_file --- #
     Hb = Habitable_Planets(df)
