@@ -13,6 +13,12 @@ import seaborn as sns
 
 
 class Habitable_Planets:
+    """
+    Habitable_Planets class is able to do calculations to predict
+    which exoplanets are in the habitable zone and what exoplanets
+    could potentially support life. Using plots, it allows for
+    these results to be visually understood.
+    """
     def __init__(self, df):
         """
         Parameters:

@@ -17,6 +17,11 @@ import seaborn as sns
 
 
 class Machine_Learning:
+    """
+    Machine_Learning class uses machine learning to predict different
+    aspects of exoplanets. Using plots, it will allow the data to be
+    understood visually as well.
+    """
     def __init__(self, df):
         """
         Parameters:
