@@ -5,7 +5,7 @@
 > system. Below are the steps on how to run our project.
 
 ## How to Download Our Data:
-> 1. Go to this [website](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=planets).
+> 1. Go to this [website](https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars).
 >       * [Documentation](https://exoplanetarchive.ipac.caltech.edu/docs/API_exoplanet_columns.html)
 >       for our dataset.
 > 2. Before downloading the dataset from the link go to the dataset and click **'Select Columns'**
