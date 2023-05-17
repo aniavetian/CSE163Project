@@ -78,6 +78,9 @@ def test_habitable_planets_file(df):
     habitable = Hb.isHabitable(15, 1, 1, 5.1, 0.02)
     print("  Earth's habitability: %s" % (habitable))
     print()
+    
+    # print results to CSV
+    Hb.all_planets_with_habitability_to_csv()
 
 
 def test_machine_learning_file(df):
@@ -117,7 +120,6 @@ def test_pandas_file(df, smaller_df):
     pandas = Pandas(df)
     average_planets = pandas.average_planets(True)
     max_planets = pandas.max_planets()
-    average_mean = pandas.mean_mass_planets()
     print("Average number of planets per solar system: %f" % (average_planets))
     print("Max number of planets in a solar system: %d" % (max_planets))
     print("Mean mass planets in each solar system:")
@@ -155,7 +157,9 @@ def main():
     """
     Calls all methods for the Final Project
     """
-    df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
+    #df = pd.read_csv("data/Exoplanets_With_Column_Info.csv", skiprows=98)
+    df = pd.read_csv("data/Exoplanets_With_Column_Info_Updated.csv", skiprows=30)
+    df = df.drop_duplicates(subset=['pl_name'])
     smaller_df = df.loc[0:9]
 
     test_graphing_file(df)

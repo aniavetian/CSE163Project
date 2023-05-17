@@ -37,17 +37,17 @@ class Machine_Learning:
         Also creates a plot comparing the predicted results to the
             actual results
         """
-        new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                               'pl_masse', 'pl_orbeccen',
+        new_data = self._data[['sy_pnum', 'pl_orbper', 'pl_orbsmax',
+                               'pl_bmasse', 'pl_orbeccen',
                                'pl_radj', 'pl_dens', 'st_teff',
                                'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
-        features = new_data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
+        features = new_data[['sy_pnum', 'pl_orbper', 'pl_orbsmax',
                              'pl_orbeccen',
                              'pl_radj', 'pl_dens', 'st_teff',
                              'st_mass', 'st_rad']]
-        labels = new_data['pl_masse']
+        labels = new_data['pl_bmasse']
 
         features_train, features_test, labels_train, labels_test = \
             train_test_split(features, labels, test_size=0.2)
@@ -92,14 +92,14 @@ class Machine_Learning:
         Also creates a plot comparing the predicted results to the
             actual results
         """
-        new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                               'pl_masse', 'pl_orbeccen',
+        new_data = self._data[['sy_pnum', 'pl_orbper', 'pl_orbsmax',
+                               'pl_bmasse', 'pl_orbeccen',
                                'pl_radj', 'pl_dens', 'st_teff',
                                'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
-        features = new_data[['pl_pnum', 'pl_orbper',
-                             'pl_masse', 'pl_orbeccen',
+        features = new_data[['sy_pnum', 'pl_orbper',
+                             'pl_bmasse', 'pl_orbeccen',
                              'pl_radj', 'pl_dens', 'st_teff',
                              'st_mass', 'st_rad']]
         labels = new_data['pl_orbsmax']
@@ -144,14 +144,14 @@ class Machine_Learning:
         Also creates a plot comparing the predicted results to the
             actual results
         """
-        new_data = self._data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                               'pl_masse', 'pl_orbeccen',
+        new_data = self._data[['sy_pnum', 'pl_orbper', 'pl_orbsmax',
+                               'pl_bmasse', 'pl_orbeccen',
                                'pl_radj', 'pl_dens', 'st_teff',
                                'st_mass', 'st_rad']]
         new_data = new_data.dropna()
 
-        features = new_data[['pl_pnum', 'pl_orbper', 'pl_orbsmax',
-                             'pl_masse',
+        features = new_data[['sy_pnum', 'pl_orbper', 'pl_orbsmax',
+                             'pl_bmasse',
                              'pl_radj', 'pl_dens', 'st_teff',
                              'st_mass', 'st_rad']]
         labels = new_data['pl_orbeccen']

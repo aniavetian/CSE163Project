@@ -25,6 +25,19 @@ class Habitable_Planets:
           df - dataframe to determine if a planet is habitable
         """
         self._df = df
+        
+    def all_planets_with_habitability_to_csv(self):
+        # Create column to store calculated values for temperature
+        new_df = self._df
+        new_df['calc_temp'] = self.calculate_planet_tempurature(
+                new_df['st_rad'], new_df['st_teff'], new_df['pl_orbsmax'])
+        
+        new_df['distance'] = self.luminosity_distance_conversion(
+                new_df['st_lum'], new_df['pl_orbsmax'])
+        
+        new_df = new_df.apply(self.isHabitable_for_csv, axis=1)
+        
+        new_df.to_csv('Files/habitable.csv')
 
     def get_habitable_planets(self):
         """
@@ -43,6 +56,7 @@ class Habitable_Planets:
         # calculated temperature
         corr_temp = (new_df['calc_temp'] >= 0) & (new_df['calc_temp'] <= 100)
         planets_in_habitable_zone = new_df[corr_temp]
+        
         return planets_in_habitable_zone
 
     def habitable_zone(self):
@@ -117,12 +131,13 @@ class Habitable_Planets:
         Written By: Ani Avetian
         """
         df_habitable = self.get_habitable_planets()
-        new_df = df_habitable[['pl_hostname', 'pl_name', 'calc_temp',
-                               'pl_masse', 'pl_rade',
+        new_df = df_habitable[['hostname', 'pl_name', 'pl_eqt',
+                               'pl_bmasse', 'pl_rade',
                                'pl_dens', 'pl_orbeccen', 'st_mass',
                                'pl_orbsmax']].dropna()
-        new_df['have_life'] = self.isHabitable(new_df['calc_temp'],
-                                               new_df['pl_masse'],
+        
+        new_df['have_life'] = self.isHabitable(new_df['pl_eqt'],
+                                               new_df['pl_bmasse'],
                                                new_df['pl_rade'],
                                                new_df['pl_dens'],
                                                new_df['pl_orbeccen'])
@@ -176,6 +191,7 @@ class Habitable_Planets:
             Luminosity Formula: (In this formula, T is effective tempurature
                                  of the star)
                 L = σT^4 * (4πr^2)
+                
             Habitable Tempurature for a planet:
                 0-100°C (273.15-373.15° Kelvin)
 
@@ -238,6 +254,42 @@ class Habitable_Planets:
         planet_tempurature = planet_T - 273.15
 
         return planet_tempurature
+    
+    def luminosity_distance_conversion(self, L, r):
+        """
+        Parameters:
+          L - Luminosity of star: Solar Luminosity [Log(L)]
+          r - radius of orbit: Orbit Semi-Major Axis [au]
+
+        Calculations:
+                
+            Conversion to Astronomical Units (AU):
+                Distance(HZ, star) = [Luminosity(star) / Luminosity(Sun)]^0.5
+                
+            Habitable Distance for a planet:
+                0.95 AU - 1.37 AU
+
+        Description of Function:
+            This function takes the 3 parameters needed to determine if the
+            planet is in the habitable zone: radius of the star (R), effective
+            tempurature of the star's surface (T), and the distance of the
+            planet to the star (r). The star's information is used to
+            calculate the luminosity (total energy produced in one second)
+            of the star. The luminosity calculation allows us to compare the
+            star's luminosity to the sun's. From there we can convert distance
+            to astronomical units, and determine if the planet is in the
+            habitable zone.
+
+        Return Value:
+            If this function returns a value between 0.95 and 1.37, the planet
+            is in the habitable zone
+
+        Written by: Bradley Knorr
+        """
+        
+        solar_luminosities = 10**L
+        
+        return r / solar_luminosities**0.5
 
     def compare_temp_to_nasa(self, calculated, nasa):
         nasa -= 273.15
@@ -278,13 +330,12 @@ class Habitable_Planets:
 
         Written by: Bradley Knorr and Ani Avetian
         """
-
         # Determine if the tempurature is correct for liquid water
         # Return false in Series if planet is not in habitable zone
         t = (tempurature >= 0) & (tempurature <= 100)
 
         # Determine if it is a rocky (> 2.5) or gas (< 2.5) planet
-        # Return false in Sereis if planet is not dense enough (not rocky)
+        # Return false in Series if planet is not dense enough (not rocky)
         d = (density >= 2.5)
 
         # Determine if radius of planet is the correct size for habitability
@@ -302,9 +353,39 @@ class Habitable_Planets:
         # We are only testing if tempurature can vary too widely
         # Return false in Series if eccentricity is too large
         e = eccentricity <= 0.25
-
+        
         # Combines all series together. If the planet passed all the
         # tests for life the value stored in the Series will be True,
         # otherwise false.
-        values = t & d & r & m & e
+        
+        values = (t & d & r & m & e)
+        
         return values
+
+    def isHabitable_for_csv(self, row):
+        features = []
+        null_features = []
+        
+        features.append(((row['distance'] >= 0.9) & (row['distance'] <= 1.37)))
+        features.append(row['pl_dens'] >= 2.5)
+        features.append((row['pl_rade'] >= 0.5) & (row['pl_rade'] <= 2.5))
+        features.append((row['pl_bmasse'] >= 0.3) & (row['pl_bmasse'] <= 10))
+        features.append(row['pl_orbeccen'] <= 0.25)
+        
+        null_features.append(math.isnan(row['calc_temp']))
+        null_features.append(math.isnan(row['pl_dens']))
+        null_features.append(math.isnan(row['pl_rade']))
+        null_features.append(math.isnan(row['pl_bmasse']))
+        null_features.append(math.isnan(row['pl_orbeccen']))
+        
+        row['have_life'] = "No"
+        
+        if features.count(True) == 5:
+            row['have_life'] = "Possible"
+        elif features[0] and features.count(True) >= 4:
+            row['have_life'] = "Missing 1"
+        elif features[0] and features.count(True) + null_features.count(True) == 5:
+            row['have_life'] = "Missing Values"
+        
+        return row
+        

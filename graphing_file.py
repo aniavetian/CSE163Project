@@ -28,11 +28,11 @@ class Graphing:
         Function graphs the distribution of masses for all the exoplanets.
         """
         # Select columns we need and drop NA values
-        new_df = self._df[['pl_name', 'pl_masse']]
+        new_df = self._df[['pl_name', 'pl_bmasse']]
         new_df = new_df.dropna()
 
         # Plot distribution
-        sns.distplot(new_df['pl_masse'], kde=False)
+        sns.distplot(new_df['pl_bmasse'], kde=False)
 
         # Label axis and save graph
         plt.xlabel('Planet Mass [Earth Mass]')
@@ -46,7 +46,7 @@ class Graphing:
         Function graphs the distribution of distance for all exoplants.
         """
         # Select columns we need and drop NA values
-        new_df = self._df[['pl_hostname', 'pl_orbsmax']]
+        new_df = self._df[['hostname', 'pl_orbsmax']]
         new_df = new_df.dropna()
 
         # Plot distribution
